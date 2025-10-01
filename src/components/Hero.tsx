@@ -32,17 +32,31 @@ export const Hero = () => {
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            Connect MENA's Best
+            Empowering MENA's
             <span className="block mt-2 bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
-              Startups & Investors
+              Innovation Ecosystem
             </span>
           </h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            The intelligent platform that matches vetted startups with verified investors using AI, 
-            secure data rooms, and on-demand advisory tools.
+            Securely connect startups and investors with AI-driven matching for faster fundraising and growth. 
+            Supporting Arabic, English, Turkish, and Kurdish.
           </p>
+
+          {/* Demo Video */}
+          <div className="max-w-3xl mx-auto">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-primary/30 shadow-[0_8px_32px_hsl(217_91%_60%/0.2)]">
+              <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto">
+                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-primary border-b-[12px] border-b-transparent ml-1"></div>
+                  </div>
+                  <p className="text-muted-foreground">30-second overview video</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
