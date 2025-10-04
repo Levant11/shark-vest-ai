@@ -14,16 +14,433 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      data_room_documents: {
+        Row: {
+          document_name: string
+          document_type: string | null
+          document_url: string
+          id: string
+          project_id: string
+          uploaded_at: string
+          uploaded_by: string
+        }
+        Insert: {
+          document_name: string
+          document_type?: string | null
+          document_url: string
+          id?: string
+          project_id: string
+          uploaded_at?: string
+          uploaded_by: string
+        }
+        Update: {
+          document_name?: string
+          document_type?: string | null
+          document_url?: string
+          id?: string
+          project_id?: string
+          uploaded_at?: string
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_room_documents_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      investor_preferences: {
+        Row: {
+          id: string
+          industries: string[] | null
+          investor_id: string
+          max_ticket_size: number | null
+          min_ticket_size: number | null
+          preferred_countries: string[] | null
+          stages: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          industries?: string[] | null
+          investor_id: string
+          max_ticket_size?: number | null
+          min_ticket_size?: number | null
+          preferred_countries?: string[] | null
+          stages?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          industries?: string[] | null
+          investor_id?: string
+          max_ticket_size?: number | null
+          min_ticket_size?: number | null
+          preferred_countries?: string[] | null
+          stages?: string[] | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      matches: {
+        Row: {
+          created_at: string
+          founder_id: string
+          id: string
+          investor_id: string
+          match_score: number | null
+          project_id: string
+          status: string | null
+        }
+        Insert: {
+          created_at?: string
+          founder_id: string
+          id?: string
+          investor_id: string
+          match_score?: number | null
+          project_id: string
+          status?: string | null
+        }
+        Update: {
+          created_at?: string
+          founder_id?: string
+          id?: string
+          investor_id?: string
+          match_score?: number | null
+          project_id?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_read: boolean | null
+          match_id: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          match_id?: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          match_id?: string | null
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean | null
+          link: string | null
+          message: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          profile_picture_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+          profile_picture_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          profile_picture_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_scores: {
+        Row: {
+          generated_at: string
+          id: string
+          market_score: number | null
+          overall_score: number | null
+          product_score: number | null
+          project_id: string
+          risk_assessment: Json | null
+          swor_analysis: Json | null
+          team_score: number | null
+          traction_score: number | null
+        }
+        Insert: {
+          generated_at?: string
+          id?: string
+          market_score?: number | null
+          overall_score?: number | null
+          product_score?: number | null
+          project_id: string
+          risk_assessment?: Json | null
+          swor_analysis?: Json | null
+          team_score?: number | null
+          traction_score?: number | null
+        }
+        Update: {
+          generated_at?: string
+          id?: string
+          market_score?: number | null
+          overall_score?: number | null
+          product_score?: number | null
+          project_id?: string
+          risk_assessment?: Json | null
+          swor_analysis?: Json | null
+          team_score?: number | null
+          traction_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_scores_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          created_at: string
+          financials_url: string | null
+          founder_id: string
+          funding_goal: number | null
+          id: string
+          industry: string | null
+          pitch_deck_url: string | null
+          project_concept: string | null
+          project_name: string
+          stage: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          financials_url?: string | null
+          founder_id: string
+          funding_goal?: number | null
+          id?: string
+          industry?: string | null
+          pitch_deck_url?: string | null
+          project_concept?: string | null
+          project_name: string
+          stage?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          financials_url?: string | null
+          founder_id?: string
+          funding_goal?: number | null
+          id?: string
+          industry?: string | null
+          pitch_deck_url?: string | null
+          project_concept?: string | null
+          project_name?: string
+          stage?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      trust_scores: {
+        Row: {
+          badge: string | null
+          id: string
+          platform_activity: number | null
+          profile_completeness: number | null
+          score: number
+          updated_at: string
+          user_id: string
+          verification_level: number | null
+        }
+        Insert: {
+          badge?: string | null
+          id?: string
+          platform_activity?: number | null
+          profile_completeness?: number | null
+          score?: number
+          updated_at?: string
+          user_id: string
+          verification_level?: number | null
+        }
+        Update: {
+          badge?: string | null
+          id?: string
+          platform_activity?: number | null
+          profile_completeness?: number | null
+          score?: number
+          updated_at?: string
+          user_id?: string
+          verification_level?: number | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_verifications: {
+        Row: {
+          completed: boolean | null
+          completed_at: string | null
+          id: string
+          task_id: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean | null
+          completed_at?: string | null
+          id?: string
+          task_id: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean | null
+          completed_at?: string | null
+          id?: string
+          task_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_verifications_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "verification_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      verification_tasks: {
+        Row: {
+          id: string
+          points: number
+          task_description: string | null
+          task_name: string
+          task_order: number
+        }
+        Insert: {
+          id?: string
+          points?: number
+          task_description?: string | null
+          task_name: string
+          task_order: number
+        }
+        Update: {
+          id?: string
+          points?: number
+          task_description?: string | null
+          task_name?: string
+          task_order?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "founder" | "investor" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +567,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["founder", "investor", "admin"],
+    },
   },
 } as const
