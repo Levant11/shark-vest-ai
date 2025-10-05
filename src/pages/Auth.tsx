@@ -11,7 +11,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const roleParam = searchParams.get("role") as 'founder' | 'investor' | null;
-  const { signUp, signIn, user } = useAuth();
+  const { signUp, signIn, user, role, loading: authLoading } = useAuth();
 
   const [isSignUp, setIsSignUp] = useState(true);
   const [formData, setFormData] = useState({
@@ -25,10 +25,17 @@ const Auth = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (user) {
-      navigate('/');
+    if (user && role && !authLoading) {
+      // Redirect authenticated users to their dashboard
+      if (role === 'founder') {
+        navigate('/founder/dashboard');
+      } else if (role === 'investor') {
+        navigate('/investor/dashboard');
+      } else if (role === 'admin') {
+        navigate('/admin/dashboard');
+      }
     }
-  }, [user, navigate]);
+  }, [user, role, authLoading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
