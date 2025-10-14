@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Rocket, TrendingUp, Users, FileText, BarChart, Lightbulb, PresentationIcon, Calculator, MessageSquare } from "lucide-react";
@@ -10,8 +8,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const FounderDashboard = () => {
-  const { user, loading, role, signOut } = useAuth();
-  const navigate = useNavigate();
   const [trustScore, setTrustScore] = useState({
     score: 0,
     badge: 'Starter',
@@ -21,63 +17,17 @@ const FounderDashboard = () => {
   });
   const [loadingData, setLoadingData] = useState(true);
 
-  // Fetch trust score data
+  // Mock data for demo purposes
   useEffect(() => {
-    if (user) {
-      fetchTrustScore();
-    }
-  }, [user]);
-
-  const fetchTrustScore = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('trust_scores')
-        .select('*')
-        .eq('user_id', user?.id)
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        setTrustScore({
-          score: data.score || 0,
-          badge: data.badge || 'Starter',
-          profile_completeness: data.profile_completeness || 0,
-          verification_level: data.verification_level || 0,
-          platform_activity: data.platform_activity || 0,
-        });
-      }
-    } catch (error: any) {
-      console.error('Error fetching trust score:', error);
-      toast.error('Failed to load trust score');
-    } finally {
-      setLoadingData(false);
-    }
-  };
-
-  // Authentication guard
-  useEffect(() => {
-    if (!loading && (!user || role !== 'founder')) {
-      navigate('/auth?role=founder');
-    }
-  }, [user, loading, role, navigate]);
-
-  if (loading || loadingData) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  }
+    setLoadingData(false);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4">
           <h1 className="text-2xl font-bold text-foreground">SharkVest</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">{user?.email}</span>
-            <Button variant="outline" size="sm" onClick={signOut}>
-              Logout
-            </Button>
-          </div>
         </div>
       </header>
 

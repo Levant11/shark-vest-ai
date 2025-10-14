@@ -1,37 +1,15 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, Users, FileText, Award, Search, Briefcase } from "lucide-react";
 
 const InvestorDashboard = () => {
-  const { user, loading, role, signOut } = useAuth();
-  const navigate = useNavigate();
-
-  // Authentication guard
-  useEffect(() => {
-    if (!loading && (!user || role !== 'investor')) {
-      navigate('/auth?role=investor');
-    }
-  }, [user, loading, role, navigate]);
-
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4">
           <h1 className="text-2xl font-bold text-foreground">SharkVest</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">{user?.email}</span>
-            <Button variant="outline" size="sm" onClick={signOut}>
-              Logout
-            </Button>
-          </div>
         </div>
       </header>
 

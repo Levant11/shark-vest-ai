@@ -46,7 +46,7 @@ export const UserRoleCards = () => {
                 variant="hero" 
                 size="lg" 
                 className="w-full group/btn"
-                onClick={() => window.location.href = '/auth?role=founder'}
+                onClick={() => window.location.href = '/founder/dashboard'}
               >
                 Start as Founder
                 <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
@@ -95,7 +95,7 @@ export const UserRoleCards = () => {
                 variant="hero" 
                 size="lg" 
                 className="w-full group/btn"
-                onClick={() => window.location.href = '/auth?role=investor'}
+                onClick={() => window.location.href = '/investor/dashboard'}
               >
                 Start as Investor
                 <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
