@@ -9,16 +9,16 @@ const InvestorDashboard = () => {
   const { user, loading, role, signOut } = useAuth();
   const navigate = useNavigate();
 
-  // Authentication guard disabled for development
-  // useEffect(() => {
-  //   if (!loading && (!user || role !== 'investor')) {
-  //     navigate('/auth?role=investor');
-  //   }
-  // }, [user, loading, role, navigate]);
+  // Authentication guard
+  useEffect(() => {
+    if (!loading && (!user || role !== 'investor')) {
+      navigate('/auth?role=investor');
+    }
+  }, [user, loading, role, navigate]);
 
-  // if (loading) {
-  //   return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  // }
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-background">

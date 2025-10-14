@@ -55,16 +55,16 @@ const FounderDashboard = () => {
     }
   };
 
-  // Authentication guard disabled for development
-  // useEffect(() => {
-  //   if (!loading && (!user || role !== 'founder')) {
-  //     navigate('/auth?role=founder');
-  //   }
-  // }, [user, loading, role, navigate]);
+  // Authentication guard
+  useEffect(() => {
+    if (!loading && (!user || role !== 'founder')) {
+      navigate('/auth?role=founder');
+    }
+  }, [user, loading, role, navigate]);
 
-  // if (loading) {
-  //   return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  // }
+  if (loading || loadingData) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-background">
